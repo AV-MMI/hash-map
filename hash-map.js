@@ -20,18 +20,12 @@ class HashMap {
 
     grow(){
         if(this.loadFactorLimit == this.capacityInUse || true){
-            let newHashMap = new HashMap(this.capacityLimit+100);
+            let newBuckets = new Array(100);
+            this.buckets = this.buckets.concat(newBuckets);
+            this.capacityLimit = this.buckets.length; 
+            this.loadFactorLimit = (75/100) * this.capacityLimit;
 
-            for(let bucket in this.buckets){
-                console.log(this.buckets[bucket].head, 'piadosas')
-                // one node
-                if(this.buckets[bucket].head.next == null){
-                    console.log('nyll');
-                } else {
-                // multiples nodes
-                    console.log('ericto', this.buckets[bucket].head)
-                }
-            }
+            return;
         }
     }
 
@@ -46,9 +40,10 @@ class HashMap {
             this.buckets[hashIndex] = linkedList;
             this.capacityInUse++;
             
-            this.grow();
         } else {
         // collision: index was not empty
+        // if it already exist set new value
+        // else create new node
             this.buckets[hashIndex].prepend({key, value});
         }
     }
@@ -196,7 +191,8 @@ class HashMap {
 let drHashMap = new HashMap(100);
 drHashMap.set("pistolero", "holaaaaaa");
 drHashMap.set("pistolero", "oioioi");
-drHashMap.set("king", "Mystery of the worm");
+drHashMap.set("king", "Mystery of the wosarm");
 drHashMap.set("ivoox", "Mystery of the worm");
 //console.log(drHashMap.get("king"));
-console.log(drHashMap.grow(), 'grow');
+drHashMap.grow()
+console.log(drHashMap, 'grow');
