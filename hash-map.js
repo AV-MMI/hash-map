@@ -44,7 +44,21 @@ class HashMap {
         // collision: index was not empty
         // if it already exist set new value
         // else create new node
+
+            // determine if it is an update or a new key
+            let currentNode = this.buckets[hashIndex].head;
+            while(currentNode){
+                // it is an update;
+                if(currentNode.value.key == key){
+                    currentNode.value.value = value;
+                    return;
+                }
+                currentNode = currentNode.next;
+            }
+
+                // it is a new key
             this.buckets[hashIndex].prepend({key, value});
+            return;
         }
     }
 
@@ -195,4 +209,4 @@ drHashMap.set("king", "Mystery of the wosarm");
 drHashMap.set("ivoox", "Mystery of the worm");
 //console.log(drHashMap.get("king"));
 drHashMap.grow()
-console.log(drHashMap, 'grow');
+console.log(drHashMap.entries(), 'grow');
